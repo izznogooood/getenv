@@ -5,7 +5,7 @@ Keep track of your .env files
 Python 3.6
 
 ### Usage
-
+```
 usage: python getenv.py [-h] [-c] [-o <project_name>] [-s <source_dir>]
 
 Copies .env files from "<source_dir>/<current_dir_name>" to current dir.
@@ -17,7 +17,7 @@ optional arguments:
                         Override <current_dir_name>.
   -s <source_dir>, --source <source_dir>
                         Permanantly change source dir
-
+```
 ### Config file
 
 `~/.config/getenv.ini`

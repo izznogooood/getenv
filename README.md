@@ -2,6 +2,7 @@
 Keep track of your .env files
 
 ### Requires
+Linux
 Python 3.6
 
 ### Usage

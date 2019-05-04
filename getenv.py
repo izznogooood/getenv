@@ -18,7 +18,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Copies .env files from "<source_dir>/<current_dir_name>" to current dir.'
     )
-    parser.add_argument('-c', '--copy', help='Copy .env to <current_dir_name>/<source_dir>', action='store_true')
+    parser.add_argument('-c', '--copy', help='Copy .env to <source_dir>/<current_dir_name>', action='store_true')
     parser.add_argument(
         '-o', '--override', metavar='<project_name>', help='Override <current_dir_name>.'
         )

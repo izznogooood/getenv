@@ -25,6 +25,7 @@ def main():
 
     if args.copy:
         copy_env_to_source(source, project_name)
+        print(f'Copied .env to: {os.path.join(source, project_name)}')
         exit(0)
 
     if not os.path.exists(os.path.join(source, project_name, '.env')):
@@ -58,9 +59,11 @@ def create_config(source_dir):
     config['SETTINGS'] = {
         'source': source_dir
     }
+    if not os.path.exists(os.path.join(os.path.expanduser('~'), '.config')):
+        os.mkdir(os.path.join(os.path.expanduser('~'), '.config'))
     with open(config_file_path, 'w') as config_file:
         config.write(config_file)
-    print(f'"{source_dir}" configered as source for .env files.')
+    print(f'"{source_dir}" configured as source for .env files.')
 
 
 def check_config():

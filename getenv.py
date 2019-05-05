@@ -37,7 +37,7 @@ def main():
 
 def check_os():
     if platform != 'linux':
-        raise OSError('This program only runs on linux!')
+        raise OSError('This program currently only runs on linux!')
 
 
 def parse_args():

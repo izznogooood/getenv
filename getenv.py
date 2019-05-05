@@ -11,24 +11,10 @@ config = configparser.ConfigParser()
 args = None
 
 
-def parse_args():
-    """initialize CLI arguments"""
-    global args
-
-    parser = argparse.ArgumentParser(
-        description='Copies .env files from "<source_dir>/<current_dir_name>" to current dir.'
-    )
-    parser.add_argument('-c', '--copy', help='Copy .env to <source_dir>/<current_dir_name>', action='store_true')
-    parser.add_argument(
-        '-o', '--override', metavar='<project_name>', help='Override <current_dir_name>.'
-        )
-    parser.add_argument('-s', '--source', metavar='<source_dir>', help='Permanantly change source dir.')
-    args = parser.parse_args()
-    main()
-
-
 def main():
     """Main Program"""
+    check_os()
+    parse_args()
     check_config()
     if args.source:
         exit(0)
@@ -46,6 +32,26 @@ def main():
         exit(1)
 
     copy(os.path.join(source, project_name, '.env'), os.path.join(os.getcwd(), '.env'))
+
+
+def check_os():
+    if platform != 'linux':
+        raise OSError('This program only runs on linux!')
+
+
+def parse_args():
+    """initialize CLI arguments"""
+    global args
+
+    parser = argparse.ArgumentParser(
+        description='Copies .env files from "<source_dir>/<current_dir_name>" to current dir.'
+    )
+    parser.add_argument('-c', '--copy', help='Copy .env to <source_dir>/<current_dir_name>', action='store_true')
+    parser.add_argument(
+        '-o', '--override', metavar='<project_name>', help='Override <current_dir_name>.'
+        )
+    parser.add_argument('-s', '--source', metavar='<source_dir>', help='Permanantly change source dir.')
+    args = parser.parse_args()
 
 
 def create_config(source_dir):
@@ -78,6 +84,4 @@ def copy_env_to_source(source_dir, project_name):
 
 
 if __name__ == "__main__":
-    if platform != 'linux':
-        raise OSError('This program only runs on linux!')
-    parse_args()
+    main()

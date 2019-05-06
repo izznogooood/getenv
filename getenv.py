@@ -76,13 +76,13 @@ def check_config():
 
 
 def copy_env_to_source(source_dir, project_name):
+    if not os.path.exists(os.path.join(os.getcwd(), '.env')):
+        print('No .env file found!')
+        exit(1)
 
     if not os.path.exists(os.path.join(source_dir, project_name)):
         os.mkdir(os.path.join(source_dir, project_name))
 
-    if not os.path.exists(os.path.join(os.getcwd(), '.env')):
-        print('No .env file found!')
-        exit(1)
     copy(os.path.join(os.getcwd(), '.env'), os.path.join(source_dir, os.path.join(project_name, '.env')))
 
 

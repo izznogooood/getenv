@@ -30,9 +30,10 @@ def main():
 
     if not os.path.exists(os.path.join(source, project_name, '.env')):
         print(f'No .env file for {project_name} found in: {os.path.join(source, project_name)}')
+        print('Did you want to copy .env to your source dir? "getenv -c"')
         exit(1)
 
-    copy(os.path.join(source, project_name, '.env'), os.path.join(os.getcwd(), '.env'))
+    copy_env_from_source(project_name, source)
 
 
 def check_os():
@@ -48,6 +49,7 @@ def parse_args():
         description='Copies .env files from "<source_dir>/<current_dir_name>" to current dir.'
     )
     parser.add_argument('-c', '--copy', help='Copy .env to <source_dir>/<current_dir_name>', action='store_true')
+    parser.add_argument('-f', '--force', help='Overwrite current .env if found', action='store_true')
     parser.add_argument(
         '-o', '--override', metavar='<project_name>', help='Override <current_dir_name>.'
         )
@@ -73,6 +75,18 @@ def check_config():
         else:
             source_dir = input('Enter full path to env source dir: ')
             create_config(source_dir)
+
+
+def copy_env_from_source(project_name, source):
+    if os.path.exists(os.path.join(os.getcwd(), '.env')) and not args.force:
+        answer = None
+        while answer not in ('y', 'n'):
+            answer = input('Overwrite current .env? (Y/N): ').lstrip().rstrip().lower()
+        if answer == 'n':
+            exit(1)
+
+    copy(os.path.join(source, project_name, '.env'), os.path.join(os.getcwd(), '.env'))
+    print("You're all set!")
 
 
 def copy_env_to_source(source_dir, project_name):

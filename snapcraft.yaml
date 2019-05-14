@@ -1,6 +1,6 @@
 base: core18
 name: getenv
-version: '0.1'
+version: '0.1-2'
 summary: Keep track of your .env files
 description: |
     usage: getenv [-h] [-c] [-o <project_name>] [-s <source_dir>]

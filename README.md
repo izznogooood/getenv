@@ -25,3 +25,7 @@ optional arguments:
 ### Config file
 
 `~/.config/getenv.ini`
+
+### Roadmap
+
+Include all .env files in dir i. e. dev.env, text.env

@@ -16,6 +16,7 @@ def main():
     check_os()
     parse_args()
     check_config()
+
     if args.source:
         exit(0)
 

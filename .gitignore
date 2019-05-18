@@ -1,2 +1,10 @@
+# ide
 .vscode
 .idea
+
+# snap
+build
+dist
+
+# setup.py
+getenv.egg-info

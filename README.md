@@ -58,6 +58,23 @@ $ git clone https://github.com/izznogooood/getenv.git
 $ python setup.py install
 ```
 
+### Help content
+```
+usage: getenv [-h] [-c] [-f] [-o <project_name>] [-s <source_dir>]
+
+Copies .env files from "<source_dir>/<project=current_dir_name>" to current
+dir.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c, --copy            Copy .env to <source_dir>/<project=current_dir_name>
+  -f, --force           Overwrite current .env if found
+  -o <project_name>, --override <project_name>
+                        Override <project=current_dir_name>.
+  -s <source_dir>, --source <source_dir>
+                        Permanantly change source dir.
+```
+
 ### Config file
 
 `~/.config/getenv.ini`

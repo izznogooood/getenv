@@ -22,7 +22,6 @@ $ getenv -c
 Enter full path to env source dir: /home/user/Nextcloud/Development/env
 "/home/user/Nextcloud/Development/env" configured as source for .env files.
 Copied dev.env
-Copied .env
 Copied test.env
 
 You're env files are stored in: /home/user/Nextcloud/Development/env/project
@@ -35,7 +34,6 @@ $ getenv
 Enter full path to env source dir: /home/user/Nextcloud/Development/env
 "/home/user/Nextcloud/Development/env" configured as source for .env files.
 Copied dev.env
-Copied .env
 Copied test.env
 
 You're all set!
@@ -46,7 +44,6 @@ you run getenv:
 ```
 $ getenv
 Copied dev.env
-Copied .env
 Copied test.env
 
 You're all set!

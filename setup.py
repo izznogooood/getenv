@@ -12,7 +12,7 @@ def get_long_description():
 
 setup(
     name='getenv',
-    version='0.1-2',
+    version='0.1-3',
     url='https://github.com/izznogooood/getenv',
     license='MIT',
     author='Anders Magnus Andersen',

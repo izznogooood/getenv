@@ -40,6 +40,24 @@ Copied test.env
 
 You're all set!
 ```
+You will be asked for source dir one time pr new client. The next time
+you run getenv:
+
+```
+$ getenv
+Copied dev.env
+Copied .env
+Copied test.env
+
+You're all set!
+```
+
+### Installation
+```
+$ git clone https://github.com/izznogooood/getenv.git
+$ python setup.py install
+```
+
 ### Config file
 
 `~/.config/getenv.ini`

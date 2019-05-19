@@ -15,7 +15,7 @@ description: |
       -s <source_dir>, --source <source_dir>
                             Permanantly change source dir
 grade: stable
-confinement: strict
+confinement: devmode
 
 plugs:
   write-home:
@@ -28,7 +28,6 @@ apps:
     command: getenv
     plugs:
       - write-home
-
 
 parts:
   getenv:

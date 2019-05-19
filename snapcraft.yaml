@@ -3,17 +3,12 @@ name: getenv
 version: '0.1-2'
 summary: Keep track of your .env files
 description: |
-    usage: getenv [-h] [-c] [-o <project_name>] [-s <source_dir>]
+    Copies your .env files from a *source dir* you provide to the *current
+    working dir*. You can also copy all the .env files in your working
+    directory to the source directory.
 
-    Copies .env files from "<source_dir>/<current_dir_name>" to current dir.
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -c, --copy            Copy .env to <source_dir>/<current_dir_name>
-      -o <project_name>, --override <project_name>
-                            Override <current_dir_name>.
-      -s <source_dir>, --source <source_dir>
-                            Permanantly change source dir
+    If you work on different clients this is a handy tool which let you
+    keep your env files separate from your repositories.
 grade: stable
 confinement: devmode
 

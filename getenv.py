@@ -41,7 +41,6 @@ def main():
         exit(0)
 
     # If no .env files are found in source/<project_name>
-
     env_files = find_env_files(os.path.join(source, project_name))
     if not env_files:
         print('You have no env files stored for this project, did you mean to copy? [getenv -c]')
@@ -83,7 +82,7 @@ def create_config(source_dir):
         os.mkdir(os.path.join(os.path.expanduser('~'), '.config'))
     with open(config_file_path, 'w') as config_file:
         config.write(config_file)
-    print(f'"{source_dir}" configured as source for .env files.')
+    print(colored(f'"{source_dir}" configured as source for .env files.', 'green'))
 
 
 def create_update_check_config():
@@ -132,7 +131,6 @@ def copy_env_from_source(files, source, project_name):
 
 
 def copy_env_to_source(files, source_dir, project_name):
-    # Create source/<project> dir if not exists
     if not os.path.exists(os.path.join(source_dir, project_name)):
         os.mkdir(os.path.join(source_dir, project_name))
 

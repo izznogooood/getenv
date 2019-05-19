@@ -9,18 +9,18 @@ If you work on different clients this is a handy tool which let you
 keep your env files separate from your repositories. 
 
 
-### Requires
+## Requires
 Linux  
 Python > 3.6  
 
-### Installation
+## Installation
 ```
 $ git clone https://github.com/izznogooood/getenv.git
 $ cd getenv
 $ python setup.py install
 ```
 
-### Basic Usage
+## Basic Usage
 Lets say you have a Nextcloud server you trust with your .env's.  
 In your project dir.:
 
@@ -56,7 +56,7 @@ Copied test.env
 You're all set!
 ```
 
-### Help content
+## Help content
 ```
 usage: getenv [-h] [-c] [-f] [-o <project_name>] [-s <source_dir>]
 
@@ -73,6 +73,6 @@ optional arguments:
                         Permanantly change source dir.
 ```
 
-### Config file
+## Config file
 
 `~/.config/getenv.ini`

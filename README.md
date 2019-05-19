@@ -13,7 +13,13 @@ keep your env files separate from your repositories.
 Linux  
 Python > 3.6  
 
-### Usage
+### Installation
+```
+$ git clone https://github.com/izznogooood/getenv.git
+$ python setup.py install
+```
+
+### Basic Usage
 Lets say you have a Nextcloud server you trust with your .env's.  
 In your project dir.:
 
@@ -47,12 +53,6 @@ Copied dev.env
 Copied test.env
 
 You're all set!
-```
-
-### Installation
-```
-$ git clone https://github.com/izznogooood/getenv.git
-$ python setup.py install
 ```
 
 ### Help content

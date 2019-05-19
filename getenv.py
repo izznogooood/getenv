@@ -16,39 +16,44 @@ args = None
 
 def main():
     """Main Program"""
-    check_os()
-    parse_args()
-    create_update_check_config()
+    try:
+        check_os()
+        parse_args()
+        create_update_check_config()
 
-    # If --source is passed, exit after update
-    if args.source:
-        exit(0)
-
-    # Load config/paths
-    config.read(config_file_path)
-    source = config['SETTINGS']['source']
-    project_name = args.override if args.override else os.path.basename(os.getcwd())
-
-    # if --copy is passed
-    if args.copy:
-        env_files = find_env_files(os.getcwd())
-        if not env_files:
-            print('No .env files found!')
+        # If --source is passed, exit after update
+        if args.source:
             exit(0)
-        copy_env_to_source(env_files, source, project_name)
+
+        # Load config/paths
+        config.read(config_file_path)
+        source = config['SETTINGS']['source']
+        project_name = args.override if args.override else os.path.basename(os.getcwd())
+
+        # if --copy is passed
+        if args.copy:
+            env_files = find_env_files(os.getcwd())
+            if not env_files:
+                print('No .env files found!')
+                exit(0)
+            copy_env_to_source(env_files, source, project_name)
+            print()
+            print(f"You're env files are stored in: {os.path.join(source, project_name)}")
+            exit(0)
+
+        # If no .env files are found in source/<project_name>
+        env_files = find_env_files(os.path.join(source, project_name))
+        if not env_files:
+            print('You have no env files stored for this project, did you mean to copy? [getenv -c]')
+            exit(0)
+
+        copy_env_from_source(env_files, source, project_name)
         print()
-        print(f"You're env files are stored in: {os.path.join(source, project_name)}")
-        exit(0)
+        print("You're all set!")
 
-    # If no .env files are found in source/<project_name>
-    env_files = find_env_files(os.path.join(source, project_name))
-    if not env_files:
-        print('You have no env files stored for this project, did you mean to copy? [getenv -c]')
-        exit(0)
-
-    copy_env_from_source(env_files, source, project_name)
-    print()
-    print("You're all set!")
+    except KeyboardInterrupt:
+        print()
+        exit(1)
 
 
 def check_os():

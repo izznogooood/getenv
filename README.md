@@ -16,6 +16,7 @@ Python > 3.6
 ### Installation
 ```
 $ git clone https://github.com/izznogooood/getenv.git
+$ cd getenv
 $ python setup.py install
 ```
 

@@ -12,17 +12,10 @@ description: |
 grade: stable
 confinement: strict
 
-plugs:
-  write-home:
-    interface: personal-files
-    write:
-    - $HOME
-
 apps:
   getenv:
     command: getenv
-    plugs:
-      - write-home
+    plugs: [home]
 
 parts:
   getenv:

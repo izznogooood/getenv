@@ -3,7 +3,7 @@ name: getenv
 version: '0.1-3'
 summary: Keep track of your .env files
 description: |
-    Copies your .env files from a *synced_location* you provide to the *current
+    Copies your .env files from a *source_dir* you provide to the *current
     working dir*. You can also copy all the .env files in your working
     directory to the source directory.
 

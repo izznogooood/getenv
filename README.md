@@ -5,8 +5,8 @@ Copies your .env files from a *source dir* you provide to the *current
 working dir*. You can also copy all the .env files in your working
 directory to the source directory.
 
-If you work on different clients this is a handy tool which let you 
-keep your env files separate from your repositories. 
+If you work on different clients this is a handy tool which let you
+get your env files from a separate synced location.
 
 
 ## Requires

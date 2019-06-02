@@ -14,6 +14,15 @@ Linux
 Python > 3.6  
 
 ## Installation
+#### Linux distro with snap support
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/getenv)
+```
+snap install getenv
+```
+
+
+#### No snap support / Or on Windows/MAC
 ```
 $ git clone https://github.com/izznogooood/getenv.git
 $ cd getenv

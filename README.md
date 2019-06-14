@@ -10,7 +10,7 @@ get your env files from a separate synced location.
 
 
 ## Requires
-Linux / Mac
+Linux / Mac  
 Python > 3.6  
 
 ## Installation

@@ -85,3 +85,8 @@ optional arguments:
 ## Config file
 
 `~/.config/getenv.ini`
+
+## Changelog
+
+### [0.2.0] - 2019-06-17
+ Added --list (List .env files in <source_dir>/<project=current_dir_name>)

@@ -1,6 +1,6 @@
 base: core18
 name: getenv
-version: '0.1-3'
+version: '0.2.0'
 summary: Keep track of your .env files
 description: |
     Copies your .env files from a *source_dir* you provide to the *current
@@ -21,7 +21,8 @@ apps:
 
 parts:
   getenv:
-    source: https://github.com/izznogooood/getenv.git
+    source: .
+    # source: https://github.com/izznogooood/getenv.git
     source-tag: master
     plugin: python
 

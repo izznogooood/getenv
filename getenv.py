@@ -41,10 +41,19 @@ def main():
             print(f"You're env files are stored in: {os.path.join(source, project_name)}")
             exit(0)
 
-        # If no .env files are found in source/<project_name>
         env_files = find_env_files(os.path.join(source, project_name))
+
+        # If no .env files are found in source/<project_name>
         if not env_files:
             print('You have no env files stored for this project, did you mean to copy? [getenv -c]')
+            exit(0)
+
+        # if --list is passed
+        if args.list:
+            print('Environment files stored for {project_name}:')
+
+            for env in env_files:
+                print(colored(env, 'yellow'))
             exit(0)
 
         copy_env_from_source(env_files, source, project_name)
@@ -70,6 +79,9 @@ def parse_args():
     )
     parser.add_argument(
         '-c', '--copy', help='Copy .env to <source_dir>/<project=current_dir_name>', action='store_true'
+    )
+    parser.add_argument(
+        '-l', '--list', help='List .env files in <source_dir>/<project=current_dir_name>', action='store_true'
     )
     parser.add_argument('-f', '--force', help='Overwrite current .env if found', action='store_true')
     parser.add_argument(
@@ -137,7 +149,11 @@ def copy_env_from_source(files, source, project_name):
 
 def copy_env_to_source(files, source_dir, project_name):
     if not os.path.exists(os.path.join(source_dir, project_name)):
-        os.mkdir(os.path.join(source_dir, project_name))
+        try:
+            os.mkdir(os.path.join(source_dir, project_name))
+        except PermissionError:
+            print(colored(f'You dont have permission to write to: {source_dir}', 'red'))
+            exit(1)
 
     for file in files:
         copy(os.path.join(os.getcwd(), file), os.path.join(source_dir, project_name, file))

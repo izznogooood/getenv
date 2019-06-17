@@ -117,6 +117,7 @@ def create_update_check_config():
             create_config(args.source)
         else:
             source_dir = input('Enter full path to env source dir: ')
+            source_dir.replace('~', os.path.expanduser('~'))
             create_config(source_dir)
 
 

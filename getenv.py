@@ -22,13 +22,14 @@ def main():
         check_os()
         parse_args()
 
+        # If --version is passed
         if args.version:
             print(f'getenv {VERSION}')
             exit(0)
 
         create_update_check_config()
 
-        # If --source is passed, exit after update
+        # If --source is passed
         if args.source:
             exit(0)
 
@@ -39,19 +40,19 @@ def main():
 
         # if --copy is passed
         if args.copy:
-            env_files = find_env_files(os.getcwd())
-            if not env_files:
+            local_env_files = find_env_files(os.getcwd())
+            if not local_env_files:
                 print('No .env files found!')
                 exit(0)
-            copy_env_to_source(env_files, source, project_name)
+            copy_env_to_source(local_env_files, source, project_name)
             print()
             print(f"You're env files are stored in: {os.path.join(source, project_name)}")
             exit(0)
 
-        env_files = find_env_files(os.path.join(source, project_name))
+        source_env_files = find_env_files(os.path.join(source, project_name))
 
         # If no .env files are found in source/<project_name>
-        if not env_files:
+        if not source_env_files:
             print('You have no env files stored for this project, did you mean to copy? [getenv -c]')
             exit(0)
 
@@ -59,11 +60,11 @@ def main():
         if args.list:
             print('Environment files stored for {project_name}:')
 
-            for env in env_files:
+            for env in source_env_files:
                 print(colored(env, 'yellow'))
             exit(0)
 
-        copy_env_from_source(env_files, source, project_name)
+        copy_env_from_source(source_env_files, source, project_name)
         print()
         print("You're all set!")
 
@@ -73,8 +74,8 @@ def main():
 
 
 def check_os():
-    if platform != 'linux':
-        raise OSError('This program currently only runs on linux!')
+    if platform not in ('linux', 'darwin'):
+        raise OSError('This program currently only supports Unix based systems!')
 
 
 def parse_args():

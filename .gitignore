@@ -5,6 +5,7 @@
 # snap
 build
 dist
+*.snap
 
 # setup.py
 getenv.egg-info

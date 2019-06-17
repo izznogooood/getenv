@@ -149,7 +149,7 @@ def copy_env_from_source(files, source, project_name):
                 answer = input(f'Overwrite {file_dest_path}? (Y/N): ').lstrip().rstrip().lower()
                 if answer == 'n':
                     continue
-                else:
+                elif answer == 'y':
                     copy(file_source_path, file_dest_path)
                     print(colored(f'Copied {file}', 'green'))
         else:

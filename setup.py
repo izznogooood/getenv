@@ -23,7 +23,7 @@ setup(
     install_requires=[
         'colorama',
         'termcolor'
-      ],
+    ],
     entry_points={
         'console_scripts': [
             'getenv = getenv:main'

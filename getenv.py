@@ -6,6 +6,8 @@ from sys import platform, exit
 from colorama import init
 from termcolor import colored
 
+VERSION = '0.2.0'
+
 init()
 config_file_path = os.path.join(
     os.path.expanduser('~'), '.config', 'getenv.ini'
@@ -19,6 +21,11 @@ def main():
     try:
         check_os()
         parse_args()
+
+        if args.version:
+            print(f'getenv {VERSION}')
+            exit(0)
+
         create_update_check_config()
 
         # If --source is passed, exit after update
@@ -77,6 +84,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Copies .env files from "<source_dir>/<project=current_dir_name>" to current dir.'
     )
+    parser.add_argument('-v', '--version', help='Print version.', action='store_true')
     parser.add_argument(
         '-c', '--copy', help='Copy .env to <source_dir>/<project=current_dir_name>', action='store_true'
     )

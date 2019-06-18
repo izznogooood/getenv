@@ -58,7 +58,7 @@ def main():
 
         # if --list is passed
         if args.list:
-            print('Environment files stored for {project_name}:')
+            print(f'Environment files stored for {project_name}:')
 
             for env in source_env_files:
                 print(colored(env, 'yellow'))
@@ -113,12 +113,25 @@ def create_config(source_dir):
 
 def create_update_check_config():
     if not os.path.exists(config_file_path) or args.source:
-        if args.source:
-            create_config(args.source)
-        else:
-            source_dir = input('Enter full path to env source dir: ')
-            source_dir.replace('~', os.path.expanduser('~'))
-            create_config(source_dir)
+        source_dir = None
+        try:
+            while not source_dir:
+                source_dir = args.source if args.source else input('Enter full path to env source dir: ')
+                
+                expand = source_dir.split('~')
+                if len(expand) > 1:
+                    source_dir = os.path.expanduser('~') + expand[1]
+                else:
+                    source_dir = expand[0]
+                
+                source_dir = source_dir if os.path.exists(source_dir) else None
+                if not source_dir:
+                    print(colored('You have entered a non existent path, please try again.', 'red'))
+        except KeyboardInterrupt:
+            print()
+            exit(1)
+        
+        create_config(source_dir)
 
 
 def find_env_files(path):
@@ -158,16 +171,17 @@ def copy_env_from_source(files, source, project_name):
 
 
 def copy_env_to_source(files, source_dir, project_name):
-    if not os.path.exists(os.path.join(source_dir, project_name)):
-        try:
+    try:
+        if not os.path.exists(os.path.join(source_dir, project_name)):
             os.mkdir(os.path.join(source_dir, project_name))
-        except PermissionError:
-            print(colored(f'You dont have permission to write to: {source_dir}', 'red'))
-            exit(1)
 
-    for file in files:
-        copy(os.path.join(os.getcwd(), file), os.path.join(source_dir, project_name, file))
-        print(colored(f'Copied {file}', 'green'))
+        for file in files:
+            copy(os.path.join(os.getcwd(), file), os.path.join(source_dir, project_name, file))
+            print(colored(f'Copied {file}', 'green'))
+    
+    except PermissionError:
+        print(colored(f'You dont have permission to write to: {source_dir}', 'red'))
+        exit(1)
 
 
 if __name__ == "__main__":

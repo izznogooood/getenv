@@ -31,13 +31,13 @@ def main():
 
         create_update_check_config()
 
-        # If --source is passed
+        # todo: If --source is passed <-- dealt with in: create_update_check_config()
         if args.source:
             sys.exit(0)
 
         # Load config/paths
         config.read(CONFIG_FILE_PATH)
-        source = config['SETTINGS']['source']
+        source_dir = config['SETTINGS']['source']
         project_name = args.override if args.override else os.path.basename(os.getcwd())
 
         # if --copy is passed
@@ -46,12 +46,10 @@ def main():
             if not local_env_files:
                 print('No .env files found!')
                 sys.exit(1)
-            copy_env_to_source(local_env_files, source, project_name)
-            print()
-            print(f"You're env files are stored in: {os.path.join(source, project_name)}")
-            sys.exit(0)
+            else:
+                copy_files_to_source(local_env_files, project_name, source_dir)
 
-        source_env_files = find_env_files(os.path.join(source, project_name))
+        source_env_files = find_env_files(os.path.join(source_dir, project_name))
 
         # If no .env files are found in source/<project_name>
         if not source_env_files:
@@ -66,7 +64,7 @@ def main():
                 print(colored(env, 'yellow'))
             sys.exit(0)
 
-        copy_env_from_source(source_env_files, source, project_name)
+        copy_files(os.path.join(source_dir, project_name), os.getcwd(), source_env_files)
         print()
         print("You're all set!")
 
@@ -157,37 +155,63 @@ def find_env_files(path):
     return _files
 
 
-def copy_env_from_source(files, source, project_name):
+def is_older_than(source, dest):
+    if os.path.getmtime(source) < os.path.getmtime(dest):
+        answer = None
+        while answer not in ('y', 'n'):
+            answer = input(
+                colored(f'Warning: {source} is older than {dest}, replace? (Y/N): ', 'yellow')
+            ).lstrip().rstrip().lower()
+            if answer == 'n':
+                return False
+            elif answer == 'y':
+                return True
+    else:
+        return True
+
+
+def copy_files(source, dest, files):
     for file in files:
-        file_source_path = os.path.join(source, project_name, file)
-        file_dest_path = os.path.join(os.getcwd(), file)
+        try:
+            file_source_path = os.path.join(source, file)
+            file_dest_path = os.path.join(dest, file)
+            result = is_older_than(file_source_path, file_dest_path)
 
-        if os.path.exists(file_dest_path) and not args.force:
-            answer = None
-            while answer not in ('y', 'n'):
-                answer = input(f'Overwrite {file_dest_path}? (Y/N): ').lstrip().rstrip().lower()
-                if answer == 'n':
-                    continue
-                elif answer == 'y':
-                    copy(file_source_path, file_dest_path)
-                    print(colored(f'Copied {file}', 'green'))
-        else:
-            copy(file_source_path, file_dest_path)
-            print(colored(f'Copied {file}', 'green'))
+            if os.path.exists(file_dest_path) and not result and not args.force:
+                continue
+
+            elif os.path.exists(file_dest_path) and result and not args.force:
+                copy(file_source_path, file_dest_path)
+                print(colored(f'Copied {file}', 'green'))
+
+            elif args.force:
+                copy(file_source_path, file_dest_path)
+                print(colored(f'Copied {file}', 'green'))
+
+            else:
+                copy(file_source_path, file_dest_path)
+                print(colored(f'Copied {file}', 'green'))
+
+        except PermissionError:
+            print(colored(f'You dont have permission to write to: {file_dest_path}', 'red'))
+            sys.exit(1)
 
 
-def copy_env_to_source(files, source_dir, project_name):
+def copy_files_to_source(files, project_name, source_dir):
     try:
         if not os.path.exists(os.path.join(source_dir, project_name)):
             os.mkdir(os.path.join(source_dir, project_name))
-
-        for file in files:
-            copy(os.path.join(os.getcwd(), file), os.path.join(source_dir, project_name, file))
-            print(colored(f'Copied {file}', 'green'))
-    
     except PermissionError:
-        print(colored(f'You dont have permission to write to: {source_dir}', 'red'))
+        print(colored(f'You dont have permission to write to: {os.path.join(source_dir, project_name)}', 'red'))
         sys.exit(1)
+
+    dest_dir = os.path.join(source_dir, project_name)
+
+    copy_files(os.getcwd(), dest_dir, files)
+    print()
+    print(f"You're env files are stored in: {os.path.join(source_dir, project_name)}")
+
+    sys.exit(0)
 
 
 if __name__ == "__main__":

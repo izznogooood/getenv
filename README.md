@@ -67,19 +67,24 @@ You're all set!
 
 ## Help content
 ```
-usage: getenv [-h] [-c] [-f] [-o <project_name>] [-s <source_dir>]
+usage: getenv.py [-h] [-v] [-c] [-l] [-f] [-o <project_name>]
+                 [-s <source_dir>]
 
 Copies .env files from "<source_dir>/<project=current_dir_name>" to current
 dir.
 
 optional arguments:
   -h, --help            show this help message and exit
+  -v, --version         Print version.
   -c, --copy            Copy .env to <source_dir>/<project=current_dir_name>
+  -l, --list            List .env files in
+                        <source_dir>/<project=current_dir_name>
   -f, --force           Overwrite current .env if found
   -o <project_name>, --override <project_name>
                         Override <project=current_dir_name>.
   -s <source_dir>, --source <source_dir>
                         Permanantly change source dir.
+
 ```
 
 ## Config file
@@ -88,6 +93,7 @@ optional arguments:
 
 ## Changelog
 
-### [0.2.0] - 2019-06-17
- Added --list (List .env files in <source_dir>/<project=current_dir_name>)
- Added --Version
+### [0.2.0] - 2019-06-21
+ Added --list (List .env files in <source_dir>/<project=current_dir_name>)  
+ Added --Version  
+ Added warning if destination env is newer than source env.

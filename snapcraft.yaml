@@ -21,7 +21,7 @@ apps:
 
 parts:
   getenv:
-    source: https://github.com/izznogooood/getenv.git
+    source: .
     source-tag: master
     plugin: python
 

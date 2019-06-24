@@ -156,18 +156,19 @@ def find_env_files(path):
 
 
 def is_older_than(source, dest):
-    if os.path.getmtime(source) < os.path.getmtime(dest):
-        answer = None
-        while answer not in ('y', 'n'):
-            answer = input(
-                colored(f'Warning: {source} is older than {dest}, replace? (Y/N): ', 'yellow')
-            ).lstrip().rstrip().lower()
-            if answer == 'n':
-                return False
-            elif answer == 'y':
-                return True
-    else:
-        return True
+    if os.path.exists(source) and os.path.exists(dest):
+        if os.path.getmtime(source) < os.path.getmtime(dest):
+            answer = None
+            while answer not in ('y', 'n'):
+                answer = input(
+                    colored(f'Warning: {source} is older than {dest}, replace? (Y/N): ', 'yellow')
+                ).lstrip().rstrip().lower()
+                if answer == 'n':
+                    return False
+                elif answer == 'y':
+                    return True
+
+    return True
 
 
 def copy_files(source, dest, files):

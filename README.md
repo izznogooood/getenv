@@ -22,7 +22,7 @@ snap install getenv
 ```
 
 
-#### No snap support / Or on Windows/MAC
+#### No snap support / Or on Windows/MAC / (Or need access outside $home)
 ```
 $ git clone https://github.com/izznogooood/getenv.git
 $ cd getenv

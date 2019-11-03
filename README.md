@@ -1,6 +1,8 @@
 # getenv
 #### *Keep track of your .env files*
 
+[![asciicast](https://asciinema.org/a/267709.svg)](https://asciinema.org/a/267709)  
+  
 Copies your .env files from a *source dir* you provide to the *current
 working dir*. You can also copy all the .env files in your working
 directory to the source directory.

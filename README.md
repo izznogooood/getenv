@@ -70,7 +70,7 @@ You're all set!
 ## Help content
 ```
 usage: getenv.py [-h] [-v] [-c] [-l] [-f] [-o <project_name>]
-                 [-s <source_dir>]
+                 [-s <source_dir>] [-r "Request / feedback in quotes"]
 
 Copies .env files from "<source_dir>/<project=current_dir_name>" to current
 dir.
@@ -86,6 +86,8 @@ optional arguments:
                         Override <project=current_dir_name>.
   -s <source_dir>, --source <source_dir>
                         Permanantly change source dir.
+  -r "Request / feedback in quotes", --request "Request / feedback in quotes"
+                        Send feedback or a request directly to the developer
 
 ```
 

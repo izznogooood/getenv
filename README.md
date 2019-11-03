@@ -10,6 +10,8 @@ directory to the source directory.
 If you work on different clients this is a handy tool which let you
 get your env files from a separate synced location.
 
+**Getenv has a --request option which lets you send feedback/requests straight to the developer. Please use it!**
+
 
 ## Requires
 Linux / Mac  

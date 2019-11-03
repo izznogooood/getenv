@@ -1,5 +1,6 @@
 from setuptools import setup
-from .getenv import VERSION
+
+from config import VERSION
 
 
 # noinspection PyBroadException
@@ -20,7 +21,7 @@ setup(
     author_email="ama @ getmail.no",
     description="Keep track of your .env files",
     long_description=get_long_description(),
-    py_modules=["getenv"],
-    install_requires=["colorama", "termcolor"],
+    py_modules=["getenv", "config"],
+    install_requires=["colorama", "termcolor", "requests"],
     entry_points={"console_scripts": ["getenv = getenv:main"]},
 )

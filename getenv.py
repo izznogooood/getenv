@@ -9,11 +9,10 @@ from shutil import copy2 as copy
 from colorama import init
 from termcolor import colored
 
-VERSION = "0.3.0"
+from config import VERSION, CLI_PROXY_URL, CONFIG_FILE_PATH
 
 init()
 config = configparser.ConfigParser()
-CONFIG_FILE_PATH = os.path.join(os.path.expanduser("~"), ".config", "getenv.ini")
 args = None
 
 
@@ -93,18 +92,17 @@ def parse_args():
 
 
 def send_request():
-    """Send feedback to the developer through a web proxy."""
-    url = "http://localhost:3000"
+    """Send feedback to the developer through a web proxy. (json)"""
     msg = {"msg": args.request}
 
-    try:
-        response = requests.post(url, json=msg, timeout=5)
-        if response.status_code == 200:
-            print(colored("Your feedback is delivered!", "green"))
-        else:
-            print(colored("Something went wrong, are you online?", "red"))
-    except:
+    # try:
+    response = requests.post(CLI_PROXY_URL, json=msg, timeout=5)
+    if response.status_code == 200:
+        print(colored("Your feedback is delivered, thank you!", "green"))
+    else:
         print(colored("Something went wrong, are you online?", "red"))
+    # except:
+    #     print(colored("Something went wrong, are you online?", "red"))
 
 
 def create_config(source_dir):

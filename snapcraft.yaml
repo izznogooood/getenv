@@ -1,6 +1,6 @@
 base: core18
 name: getenv
-version: '0.2.0'
+version: '0.3.0'
 summary: Keep track of your .env files
 description: |
     Copies your .env files from a *source_dir* you provide to the *current
@@ -17,7 +17,7 @@ confinement: strict
 apps:
   getenv:
     command: getenv
-    plugs: [home]
+    plugs: [home, network]
 
 parts:
   getenv:

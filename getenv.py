@@ -95,14 +95,18 @@ def send_request():
     """Send feedback to the developer through a web proxy. (json)"""
     msg = {"msg": args.request}
 
-    # try:
-    response = requests.post(CLI_PROXY_URL, json=msg, timeout=5)
-    if response.status_code == 200:
-        print(colored("Your feedback is delivered, thank you!", "green"))
-    else:
+    try:
+        response = requests.post(CLI_PROXY_URL, json=msg, timeout=5)
+        if response.status_code == 200:
+            print(colored("Your feedback is delivered, thank you!", "green"))
+        else:
+            print(
+                colored(
+                    "Getenv mail proxy server fault, please report a bug:\nhttps://github.com/izznogooood/getenv", "red"
+                )
+            )
+    except:
         print(colored("Something went wrong, are you online?", "red"))
-    # except:
-    #     print(colored("Something went wrong, are you online?", "red"))
 
 
 def create_config(source_dir):

@@ -22,7 +22,7 @@ def main():
     Wrapped in try block, except keyboard interrupt.
     """
     try:
-        check_for_linux_or_darwin_or_error()
+        check_for_linux_or_darwin()
         parse_args()
         if args.request:
             send_request()
@@ -59,7 +59,7 @@ def main():
         sys.exit(1)
 
 
-def check_for_linux_or_darwin_or_error():
+def check_for_linux_or_darwin():
     """Check for compatible operating systems, raises error if incompatible os."""
     if sys.platform not in ("linux", "darwin"):
         raise OSError(colored("This program currently only supports Unix based systems!", "red"))
@@ -93,6 +93,18 @@ def parse_args():
 
 def send_request():
     """Send feedback to the developer through a web proxy. (json)"""
+    print(colored("You are about to send the following information to the developer:", "yellow"))
+    print()
+    print(args.request)
+    print()
+
+    answer = None
+    while answer not in ("y", "n"):
+        answer = input(colored("Are you sure (y/n): ", "yellow"))
+        if answer == "n":
+            print(colored("Aborted!", "red"))
+            sys.exit(1)
+
     msg = {"msg": args.request}
 
     try:

@@ -6,12 +6,12 @@ import sys
 import getpass
 import requests
 from shutil import copy2 as copy
-from colorama import init
+from colorama import init as colorama_init
 from termcolor import colored
 
 from config import VERSION, CLI_PROXY_URL, CONFIG_FILE_PATH
 
-init()
+colorama_init()
 config = configparser.ConfigParser()
 args = None
 

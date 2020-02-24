@@ -24,16 +24,21 @@ def main():
     try:
         check_for_linux_or_darwin()
         parse_args()
+
         if args.request:
             send_request()
             sys.exit(0)
+
         if args.version:
             print(f"getenv {VERSION}")
             sys.exit(0)
+
         config_handler()
         config.read(CONFIG_FILE_PATH)
+        
         source_dir = config["SETTINGS"]["source"]
         project_name = args.override if args.override else os.path.basename(os.getcwd())
+        
         if args.copy:
             local_env_files = find_env_files(os.getcwd())
             if not local_env_files:
@@ -41,15 +46,18 @@ def main():
                 sys.exit(1)
             else:
                 copy_files_to_source(local_env_files, project_name, source_dir)
+       
         source_env_files = find_env_files(os.path.join(source_dir, project_name))
         if not source_env_files:
             print("You have no env files stored for this project, did you mean to copy? [getenv -c]")
             sys.exit(1)
+       
         if args.list:
             print(f"Environment files stored for {project_name}:")
             for env in source_env_files:
                 print(colored(env, "yellow"))
             sys.exit(0)
+        
         copy_files(os.path.join(source_dir, project_name), os.getcwd(), source_env_files)
         print()
         print("You're all set!")
@@ -160,6 +168,7 @@ def config_handler():
                 source_dir = None
 
         create_config(source_dir)
+        
         if args.source:
             sys.exit(0)
 

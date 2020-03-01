@@ -202,9 +202,10 @@ def copy_files(source, dest, files):
     Checks if source is older than dest and if --force is passed, overwrites.
     """
     for file in files:
+        file_source_path = os.path.join(source, file)
+        file_dest_path = os.path.join(dest, file)
+
         try:
-            file_source_path = os.path.join(source, file)
-            file_dest_path = os.path.join(dest, file)
             result = is_older_than(file_source_path, file_dest_path)
 
             if os.path.exists(file_dest_path) and not result and not args.force:

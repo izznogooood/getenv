@@ -99,10 +99,14 @@ optional arguments:
 
 ## Changelog
 
+
+### [0.3.1] - 2020-02-01
+ Feedback changed to "serverless" function.
+
+### [0.3.0] - 2019-11-04
+ Added --request (Send feedback / requests straight to the developer.) 
+
 ### [0.2.0] - 2019-06-21
  Added --list (List .env files in <source_dir>/<project=current_dir_name>)  
  Added --Version  
  Added warning if destination env is newer than source env.
-
-### [0.3.0] - 2019-11-04
- Added --request (Send feedback / requests straight to the developer.) 
